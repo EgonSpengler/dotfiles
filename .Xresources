@@ -1,0 +1,68 @@
+! ------ rxvt-unicode -------
+! ---------------------------
+
+URxvt.depth:        32
+URxvt.background:   [90]#0F0F0F
+
+URxvt.scrollstyle:  plain
+URxvt.font:         xft:PragmataPro:antialias=true:pixelsize=13
+!URxvt.font:         xft:Bitstream Vera Sans Mono:antialias=true:pixelsize=13
+URxvt.borderLess:      false
+URxvt.troughColor:     #D3D4FF
+URxvt.scrollBar_right: True
+URxvt.scrollColor:     #865358
+URxvt.internalBorder:  1
+URxvt.saveLines:       8192
+
+URxvt.font-size.step:  2
+URxvt.keysym.C-Up:     font-size:increase
+URxvt.keysym.C-Down:   font-size:decrease
+
+Xft.autohint:  0
+Xft.lcdfilter: lcdlegacy
+Xft.hintstyle: hintfull
+Xft.hinting:   1
+Xft.antialias: 0
+Xft.rgba:      rgb
+
+! special
+*.foreground:   #f0e2d5
+!*.background:   #1b1b1b
+*.cursorColor:  #c9b6a4
+
+! black
+*.color0:       #2a2a2a
+*.color8:       #404040
+
+! red
+*.color1:       #ec4e40
+*.color9:       #ff6c5f
+
+! green
+*.color2:       #8c9c2a
+*.color10:      #b8ca4b
+
+! yellow
+*.color3:       #e39131
+*.color11:      #c7a551
+
+! blue
+*.color4:       #698db1
+*.color12:      #95b9de
+
+! magenta
+*.color5:       #906398
+*.color13:      #ad7fa8
+
+! cyan
+! *.color6:       #848887
+! *.color14:      #a5ab96
+*.color6:       #8b9c98
+*.color14:      #a9c6b2
+
+! white
+*.color7:       #c1af9e
+*.color15:      #f2d9cb
+
+! common perl extensions
+URxvt.perl-ext-common:   vtwheel,font-size
