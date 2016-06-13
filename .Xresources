@@ -2,11 +2,12 @@
 ! ---------------------------
 
 URxvt.depth:        32
-URxvt.background:   [90]#0F0F0F
+!URxvt.background:   [90]#0F0F0F
+URxvt.background:   [85]#000
 
-URxvt.scrollstyle:  plain
-URxvt.font:         xft:PragmataPro:antialias=true:pixelsize=13
-!URxvt.font:         xft:Bitstream Vera Sans Mono:antialias=true:pixelsize=13
+URxvt.scrollstyle:     plain
+!URxvt.font:            xft:PragmataPro:antialias=true:pixelsize=13
+URxvt.font:            xft:Terminus:antialias=false:pixelsize=13
 URxvt.borderLess:      false
 URxvt.troughColor:     #D3D4FF
 URxvt.scrollBar_right: True
@@ -14,20 +15,20 @@ URxvt.scrollColor:     #865358
 URxvt.internalBorder:  1
 URxvt.saveLines:       8192
 
-URxvt.font-size.step:  2
+URxvt.font-size.step:  1
 URxvt.keysym.C-Up:     font-size:increase
 URxvt.keysym.C-Down:   font-size:decrease
 
 Xft.autohint:  0
-Xft.lcdfilter: lcdlegacy
+Xft.lcdfilter: lcddefault
 Xft.hintstyle: hintfull
 Xft.hinting:   1
-Xft.antialias: 0
-Xft.rgba:      rgb
+Xft.antialias: 1
+Xft.rgba:      vrgb
 
 ! special
 *.foreground:   #f0e2d5
-!*.background:   #1b1b1b
+*.background:   #101010
 *.cursorColor:  #c9b6a4
 
 ! black
