@@ -1,5 +1,4 @@
 #!/bin/bash
-#[ -f /etc/xprofile ] && source /etc/xprofile
 
 export PATH=$PATH:~/bin
 export QT_GRAPHICSSYSTEM=native
