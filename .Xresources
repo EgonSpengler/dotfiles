@@ -2,12 +2,10 @@
 ! ---------------------------
 
 URxvt.depth:        32
-!URxvt.background:   [90]#0F0F0F
 URxvt.background:   [85]#000
 
 URxvt.scrollstyle:     plain
-!URxvt.font:            xft:PragmataPro:antialias=true:pixelsize=13
-URxvt.font:            xft:Terminus:antialias=false:pixelsize=13
+URxvt.font:            xft:Terminus:antialias=false:pixelsize=17
 URxvt.borderLess:      false
 URxvt.troughColor:     #D3D4FF
 URxvt.scrollBar_right: True
@@ -56,8 +54,6 @@ Xft.rgba:      vrgb
 *.color13:      #ad7fa8
 
 ! cyan
-! *.color6:       #848887
-! *.color14:      #a5ab96
 *.color6:       #8b9c98
 *.color14:      #a9c6b2
 

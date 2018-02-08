@@ -1,7 +1,8 @@
 #!/bin/bash
+[ -f /etc/xprofile ] && source /etc/xprofile
 
-export PATH=$PATH:~/bin
-export QT_GRAPHICSSYSTEM=native
+export PATH=$HOME/bin:$PATH:
+#export QT_GRAPHICSSYSTEM=native
 
 if [ -d /etc/X11/xinit/xinitrc.d ]; then
   for f in /etc/X11/xinit/xinitrc.d/*; do
@@ -10,25 +11,15 @@ if [ -d /etc/X11/xinit/xinitrc.d ]; then
   unset f
 fi
 
-xrdb -merge "${HOME}/.Xresources" &
-xset b off &                                       # disable annoying system beep
-compton --config=/home/egon/.config/compton.conf & # for compositing
+xmodmap $HOME/.Xmodmap
 xset +fp /usr/share/fonts/local &
 xset fp rehash &
-xset r rate 300 40 &                               # set pleasant key repeat delay/rate
 xfce4-power-manager &
-pulseaudio --start &
-#pa-applet &
-nm-applet --sm-disable &
-xscreensaver -no-splash &
-nitrogen --restore  &                             # set wallpapers
-thunar --daemon &                                 # make starting thunar faster later
+xrdb -merge "${HOME}/.Xresources" &
+xmodmap $HOME/.Xmodmap
 
-xbindkeys &
-xkbset -a &
-synergy &
-menutray -g &
-xmodmap ~/.Xmodmap &&
-$HOME/.xinit-local                                # system-specific startup scripts
+# system-specific startup scripts
+$HOME/.xinit-local
+
 exec ck-launch-session i3
 # exec dbus-launch i3

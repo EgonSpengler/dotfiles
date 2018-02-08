@@ -1,8 +1,9 @@
-# Will show errors without i3-gaps installed.
-focus_follows_mouse no
-
 # i3 config file (v4)
 # Please see http://i3wm.org/docs/userguide.html for a complete reference!
+#
+# Will show errors without i3-gaps installed.
+
+focus_follows_mouse no
 
 set $mod Mod3
 
@@ -11,12 +12,13 @@ set $mod Mod3
 font pango:Terminus, FontAwesome 12px
 
 # for marking a main window to return to
-set $mod2 Control
 bindsym $mod+b mark --toggle return
 #bindsym --whole-window Control+button1 [con_mark="return"] focus
 
-# bindsym --whole-window Control+button1 nop
+# float audio control window
 for_window [class="(?i)pavucontrol"] floating enable, move position mouse
+
+# stick window to all workspaces
 bindsym $mod+a sticky toggle
 
 # Use Mouse+$mod to drag floating windows to their wanted position
@@ -28,9 +30,9 @@ bindsym $mod+Return exec urxvt
 # kill focused window
 bindsym $mod+q kill
 
-# start dmenu (a program launcher)
-bindsym $mod+r exec dmenu_run -fn "PragmataPro-10" -sb "#a26a2a" -nb "#111" -nf "#e39131"
-bindsym $mod+c exec j4-dmenu-desktop
+# start dmenu or rofi (a program launcher)
+# bindsym $mod+r exec dmenu_run -fn "PragmataPro-10" -sb "#a26a2a" -nb "#111" -nf "#e39131"
+bindsym $mod+r exec rofi -show run
 
 # start thunar
 bindsym $mod+m exec Thunar
@@ -71,7 +73,7 @@ bindsym $mod+space focus mode_toggle
 bindsym $mod+ampersand workspace 1
 bindsym $mod+bracketleft workspace 2
 bindsym $mod+braceleft workspace 3
-bindsym $mod+braceright workspace 4
+bindsym $modbindsym $mod+r exec rofi -show run+braceright workspace 4
 bindsym $mod+parenleft workspace 5
 bindsym $mod+equal workspace 6
 bindsym $mod+asterisk workspace 7
@@ -96,8 +98,9 @@ bindsym $mod+Shift+exclam move container to workspace 11
 bindsym $mod+Shift+numbersign move container to workspace 12
 
 # JDownloader windows appear on same workspace
-
 assign [class="JDownloader"] 9
+
+# Float some dialogs and other apps
 for_window [title="Preferences$"] floating enable
 for_window [window_role="pop-up"] floating enable
 for_window [window_role="task_dialog"] floating enable
@@ -125,8 +128,41 @@ bindsym $mod+Shift+p restart
 bindsym $mod+Shift+period exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
 #bindsym $mod+Shift+period exec ~/.i3/scripts/i3-exit
 
+# Auto-grow some media viewers
 for_window [class="Eom"] resize grow width 190 px
 for_window [window_role="vlc-main"] resize grow width 190 px;
+
+# Gap size control
+set $mode_gaps Gaps: (o) outer, (i) inner
+set $mode_gaps_outer Outer Gaps: +|-|0 (local), Shift + +|-|0 (global)
+set $mode_gaps_inner Inner Gaps: +|-|0 (local), Shift + +|-|0 (global)
+bindsym $mod+Shift+g mode "$mode_gaps"
+mode "$mode_gaps" {
+        bindsym o      mode "$mode_gaps_outer"
+        bindsym i      mode "$mode_gaps_inner"
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
+}
+mode "$mode_gaps_inner" {
+        bindsym plus  gaps inner all plus 2
+        bindsym minus gaps inner all minus 2
+        bindsym Shift+plus  gaps inner current plus 2
+        bindsym Shift+minus gaps inner current minus 2
+
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
+}
+mode "$mode_gaps_outer" {
+        bindsym plus  gaps outer all plus 2
+        bindsym minus gaps outer all minus 2
+
+        bindsym Shift+plus  gaps outer current plus 2
+        bindsym Shift+minus gaps outer current minus 2
+
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
+}
+
 
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)
@@ -155,4 +191,22 @@ client.focused_inactive #424242 #424242 #dccab9
 client.unfocused        #333333 #111111 #999999
 client.background       #161616
 
-exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
+#exec --no-startup-id cinnamon-settings-daemon &>$HOME/cin-out
+#exec --no-startup-id /usr/libexec/polkit-gnome-authentication-agent-1
+#exec xmodmap $HOME/.Xmodmap
+exec --no-startup-id /usr/local/libexec/notify-osd
+exec --no-startup-id eval $(ssh-agent) # && ssh-add ~/.ssh/id_dsa.archivas_weak ~/.ssh/id_rsa_tyadam ~/.ssh/id_rsa.hds_weak ~/.ssh
+#exec --no-startup-id /usr/libexec/gnome-settings-daemon
+exec --no-startup-id xset b off
+exec --no-startup-id compton --config=$HOME/.config/compton.conf
+exec --no-startup-id xset r rate 300 40
+exec --no-startup-id pulseaudio --start
+exec --no-startup-id nm-applet --sm-disable
+exec --no-startup-id xscreensaver -no-splash
+exec --no-startup-id nitrogen --restore
+exec --no-startup-id thunar --daemon
+exec --no-startup-id xbindkeys
+exec --no-startup-id xkbset -a
+#exec --no-startup-id sleep 2 && synergy
+exec --no-startup-id menutray -g &> ~/menutray.log
+#exec --no-startup-id i3-msg 'workspace 10; exec /usr/bin/rocketchat'
